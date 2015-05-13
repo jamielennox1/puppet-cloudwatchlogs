@@ -1,0 +1,45 @@
+{
+  "name": "previousnext-cloudwatchlogs",
+  "version": "0.0.1",
+  "author": "previousnext",
+  "summary": "Configure AWS Cloudwatch Logs.",
+  "license": "Apache",
+  "source": "https://github.com/previousnext/puppet-cloudwatchlogs",
+  "project_page": "https://github.com/previousnext/puppet-cloudwatchlogs",
+  "issues_url": "https://github.com/previousnext/puppet-cloudwatchlogs/issues",
+  "tags": ["aws", "cloudwatch", "logs"],
+  "operatingsystem_support": [
+    {
+    "operatingsystem":"Amazon"
+    },
+    {
+    "operatingsystem":"Ubuntu"
+    },
+    {
+    "operatingsystem":"RedHat"
+    },
+    {
+    "operatingsystem":"CentOS"
+    }
+  ],
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": "3.x"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": "3.x"
+    }
+  ],
+  "dependencies": [
+    {
+      "name":"puppetlabs-stdlib",
+      "version_requirement": ">= 1.0.0"
+    },
+    {
+      "name":"puppetlabs-concat",
+      "version_requirement": "1.1.1"
+    }
+  ]
+}

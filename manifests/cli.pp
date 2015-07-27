@@ -1,6 +1,6 @@
 # Cloudwatch Logs configuration.
 
-class cloudwatchlogs::config {
+class cloudwatchlogs::cli {
 
   if $region and $aws_access_key_id and $aws_secret_access_key {
     file { '/var/awslogs/etc/awscli.conf':

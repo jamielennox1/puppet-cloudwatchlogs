@@ -1,6 +1,6 @@
 {
   "name": "previousnext-cloudwatchlogs",
-  "version": "0.0.3",
+  "version": "0.0.5",
   "author": "previousnext",
   "summary": "Configure AWS Cloudwatch Logs.",
   "license": "Apache",

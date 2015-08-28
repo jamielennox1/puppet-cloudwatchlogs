@@ -13,8 +13,9 @@ class cloudwatchlogs::install {
     $_region = $region
   }
 
+  # Pass the region to the credentials file.
   cloudwatchlogs::cli { 'credentials':
-    region => $region,
+    region => $_region,
   }
   include cloudwatchlogs::config
   include cloudwatchlogs::service

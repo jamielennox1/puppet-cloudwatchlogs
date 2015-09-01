@@ -2,12 +2,22 @@
 
 class cloudwatchlogs::install {
 
-  $region                = hiera('cloudwatchlogs_region',     undef)
-  $aws_access_key_id     = hiera('cloudwatchlogs_key_id',     undef)
-  $aws_secret_access_key = hiera('cloudwatchlogs_access_key', undef)
+  # Only need the region here, do not load the auth creds. Default to
+  # us-east-1 because, but whine if we do. Basically: set a region, mate.
+  $region = hiera('cloudwatchlogs_region', undef)
 
+  if !$region {
+    $_region = 'us-east-1'
+    notice('No region defined for cloudwatchlogs, defaulting to us-east-1.')
+  } else {
+    $_region = $region
+  }
+
+  # Pass the region to the credentials file.
+  cloudwatchlogs::cli { 'credentials':
+    region => $_region,
+  }
   include cloudwatchlogs::config
-  include cloudwatchlogs::cli
   include cloudwatchlogs::service
 
   if ! defined(Package['wget']) {
@@ -24,7 +34,7 @@ class cloudwatchlogs::install {
 
   exec { 'cloudwatchlogs-install':
     path    => '/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin',
-    command => "python /usr/local/src/awslogs-agent-setup.py -n -r ${region} -c /etc/awslogs/awslogs.conf",
+    command => "python /usr/local/src/awslogs-agent-setup.py -n -r ${_region} -c /etc/awslogs/awslogs.conf",
     onlyif  => '[ -e /usr/local/src/awslogs-agent-setup.py ]',
     unless  => '[ -d /var/awslogs/bin ]',
     require => File['/etc/awslogs/awslogs.conf'],

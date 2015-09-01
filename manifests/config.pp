@@ -6,19 +6,19 @@ class cloudwatchlogs::config {
     ensure => 'directory',
     owner  => 'root',
     group  => 'root',
-    mode   => '0755',
+    mode   => '0750',
   }
   file { '/var/awslogs':
     ensure => 'directory',
     owner  => 'root',
     group  => 'root',
-    mode   => '0755',
+    mode   => '0750',
   }
   file { '/var/awslogs/etc':
     ensure  => 'directory',
     owner   => 'root',
     group   => 'root',
-    mode    => '0755',
+    mode    => '0750',
     require => File['/var/awslogs'],
     before  => [
       File['/var/awslogs/etc/awslogs.conf'],

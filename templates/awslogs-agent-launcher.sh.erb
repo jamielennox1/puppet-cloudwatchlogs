@@ -1,0 +1,10 @@
+#!/bin/sh
+# Version: 1.3.6
+#
+# MANAGED BY PUPPET.
+echo -n $$ > /var/awslogs/state/awslogs.pid
+<% if @profile -%>
+/usr/bin/env -i AWS_CONFIG_FILE=/var/awslogs/etc/aws.conf HOME=/root /usr/bin/nice -n 4 /var/awslogs/bin/aws logs push --config-file /var/awslogs/etc/awslogs.conf --profile <%= @profile %> >> /var/log/awslogs.log 2>&1
+<% else -%>
+/usr/bin/env -i AWS_CONFIG_FILE=/var/awslogs/etc/aws.conf HOME=/root /usr/bin/nice -n 4 /var/awslogs/bin/aws logs push --config-file /var/awslogs/etc/awslogs.conf >> /var/log/awslogs.log 2>&1
+<% end -%>

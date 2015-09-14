@@ -36,7 +36,7 @@ define cloudwatchlogs::cli (
       group   => 'root',
       mode    => '0755',
       content => template('cloudwatchlogs/awslogs-agent-launcher.sh.erb'),
-      require => Exec['cloudwatchlogs-install',
+      require => Exec['cloudwatchlogs-install'],
       notify  => Service['awslogs'],
     }
   }
